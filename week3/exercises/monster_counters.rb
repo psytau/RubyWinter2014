@@ -9,13 +9,8 @@ puts $monsters.map {|m| m[:dangers]}
   .map {|a| a[0]}                                 # clean up
 
 
-puts " - vulnerabilities:"
-puts $monsters.map {|m| m[:vulnerabilities]}
-  .flatten
-  .reduce(Hash.new(0)) {|h, d| h[d] = h[d]+1; h}
-  .sort_by {|d| 0-d[1]}[0..1]
-  .map {|a| a[0]}
 
+# or within a loop
 puts " - dangers - "
 x = $monsters.inject(Hash.new(0)) do |h, m|
   m[:dangers].each() do |d|
@@ -23,5 +18,6 @@ x = $monsters.inject(Hash.new(0)) do |h, m|
   end
   h
 end
+
 puts x.sort_by {|d| 0-d[1]}[0..1]
-  .map{|a| a[0]}
+  .map{|a| a[0]}                   # is there a more idomatic way to grab out the keys?
